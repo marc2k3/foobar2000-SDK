@@ -1,0 +1,21 @@
+name: VS 2019
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: windows-2019
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
+    strategy:
+      matrix:
+        configuration: ['Release', 'Debug']
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up MSBuild
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Build
+      run: msbuild /m '/p:Platform=Win32;Configuration=${{ matrix.configuration }}' foobar2000\foo_sample\foo_sample.sln
