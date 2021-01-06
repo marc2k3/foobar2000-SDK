@@ -74,26 +74,32 @@ const char * charReplaceDefault(char c) {
 	}
 }
 
+inline const char* operator""_as_char(const char8_t* p, std::size_t) {
+	return reinterpret_cast<const char*>(p);
+}
+
+#define U8(x) u8##x##_as_char
+
 const char * charReplaceModern(char c) {
 	switch (c) {
 	case '*':
-		return u8"∗";
+		return U8("∗");
 	case '\"':
-		return u8"''";
+		return U8("''");
 	case ':':
-		return u8"∶";
+		return U8("∶");
 	case '/':
-		return u8"⁄";
+		return U8("⁄");
 	case '\\':
-		return u8"⧵";
+		return U8("⧵");
 	case '?':
-		return u8"？";
+		return U8("？");
 	case '<':
-		return u8"˂";
+		return U8("˂");
 	case '>':
-		return u8"˃";
+		return U8("˃");
 	case '|':
-		return u8"∣";
+		return U8("∣");
 	default:
 		return "_";
 	}
