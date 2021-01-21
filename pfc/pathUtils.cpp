@@ -1,4 +1,4 @@
-﻿#include "pfc.h"
+#include "pfc.h"
 
 static_assert(L'Ö' == 0xD6, "Compile as Unicode!!!");
 
